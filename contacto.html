@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | CANDLESPOU</title>
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="shortcut icon" href="Imagenes/logopou.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="Imagenes/logopou.png" alt="CANDLESPOU Logo"></a>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="productos.html">Productos</a></li>
+            <li><a href="nosotros.html">Quienes somos</a></li>
+        </ul>
+    </nav>
+    
+    <main class="contact-container">
+        <h1>Contáctanos</h1>
+        
+        <div class="contact-grid">
+            <!-- Formulario de contacto -->
+            <div class="contact-form">
+                <h2>Envíanos un mensaje</h2>
+                <form id="contactForm" onsubmit="submitContactForm(event)">
+                    <div class="form-group">
+                        <label for="contactName">Nombre completo</label>
+                        <input type="text" id="contactName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactEmail">Correo electrónico</label>
+                        <input type="email" id="contactEmail" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactPhone">Teléfono (opcional)</label>
+                        <input type="tel" id="contactPhone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactSubject">Asunto</label>
+                        <select id="contactSubject" required>
+                            <option value="">Selecciona un asunto</option>
+                            <option value="consulta">Consulta general</option>
+                            <option value="pedido">Sobre mi pedido</option>
+                            <option value="devolucion">Devolución o garantía</option>
+                            <option value="distribuidor">Quiero ser distribuidor</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactMessage">Mensaje</label>
+                        <textarea id="contactMessage" rows="5" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Enviar mensaje</button>
+                </form>
+            </div>
+            
+            <!-- Información de contacto -->
+            <div class="contact-info">
+                <h2>Información de contacto</h2>
+                
+                <div class="contact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h3>Dirección</h3>
+                        <p>Calle Aromas 123, Colonia Esencia<br>Ciudad de México, CDMX 56789</p>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fas fa-phone-alt"></i>
+                    <div>
+                        <h3>Teléfono</h3>
+                        <p>+52 55 1234 5678</p>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h3>Correo electrónico</h3>
+                        <p>contacto@candlespou.com</p>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h3>Horario de atención</h3>
+                        <p>Lunes a Viernes: 9:00 - 18:00 hrs<br>
+                        Sábados: 10:00 - 14:00 hrs<br>
+                        Domingos: Cerrado</p>
+                    </div>
+                </div>
+                
+                <div class="social-contact">
+                    <h3>Síguenos en redes</h3>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/profile.php?id=61566978972080&mibextid=ZbWKwL" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/candlespou/profilecard/?igsh=NWxxOXVoZGI2anRq" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mapa de ubicación -->
+        <div class="contact-map">
+            <h2>Nuestra ubicación</h2>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.888244552543!2d-99.1679499241646!3d19.427020740876915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff35f5bd1563%3A0x6c366f0e2de02ff7!2sEl%20%C3%81ngel%20de%20la%20Independencia!5e0!3m2!1ses-419!2smx!4v1717289321237!5m2!1ses-419!2smx" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="social-media">
+                <p>Síguenos en redes sociales</p>
+                <a href="https://www.facebook.com/profile.php?id=61566978972080&mibextid=ZbWKwL" target="_blank">
+                    <img src="Imagenes/iconoFB.png" alt="Facebook" width="30px">
+                </a>
+                <a href="https://www.instagram.com/candlespou/profilecard/?igsh=NWxxOXVoZGI2anRq" target="_blank">
+                    <img src="Imagenes/iconoInsta.png" alt="Instagram" width="30px">
+                </a>
+                <a href="https://wa.me/" target="_blank">
+                    <img src="Imagenes/iconoWhat.png" alt="WhatsApp" width="30px">
+                </a>
+            </div>
+            <div class="footer-links">
+                <a href="#">Políticas de privacidad</a>
+                <a href="#">Términos y condiciones</a>
+                <a href="nosotros.html">Quiénes somos</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Función para enviar el formulario (simulada)
+        function submitContactForm(event) {
+            event.preventDefault();
+            
+            // Obtener valores del formulario
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const subject = document.getElementById('contactSubject').value;
+            const message = document.getElementById('contactMessage').value;
+            
+            // Aquí normalmente enviarías los datos a un servidor
+            console.log('Formulario enviado:', { name, email, subject, message });
+            
+            // Mostrar mensaje de éxito
+            alert('¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.');
+            
+            // Limpiar formulario
+            document.getElementById('contactForm').reset();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dudas y Quejas | [Nombre de tu Negocio de Velas]</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #F5F5F0;
+            color: #333333;
+            margin: 0;
+            padding: 20px;
+            font-size: 19px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 750px;
+            margin: 30px auto;
+            padding: 40px;
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #D4B483;
+        }
+        h1 {
+            text-align: center;
+            color: #2A5CAA;
+            font-size: 2.4em;
+            margin-bottom: 30px;
+            font-weight: bold;
+            border-bottom: 2px solid #E8B224;
+            padding-bottom: 15px;
+        }
+        .form-group {
+            margin-bottom: 28px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #2A5CAA;
+            font-size: 1.1em;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #D4B483;
+            border-radius: 5px;
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #FFFDF8;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+        input:focus, textarea:focus, select:focus {
+            border-color: #2A5CAA;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(42, 92, 170, 0.1);
+        }
+        textarea {
+            min-height: 180px;
+            resize: vertical;
+        }
+        .radio-group {
+            display: flex;
+            gap: 25px;
+            margin-top: 15px;
+        }
+        .radio-option {
+            display: flex;
+            align-items: center;
+        }
+        .radio-option input {
+            width: auto;
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        .radio-option label {
+            margin-bottom: 0;
+            font-weight: normal;
+        }
+        button {
+            background-color: #2A5CAA;
+            color: white;
+            border: none;
+            padding: 16px 30px;
+            font-size: 1.1em;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-family: 'Times New Roman', Times, serif;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #1E4B8F;
+        }
+        .btn-home {
+            background-color: #E8B224;
+            color: #333333;
+            margin-top: 20px;
+            display: inline-block;
+            width: auto;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .btn-home:hover {
+            background-color: #D4A01F;
+        }
+        .confirmation {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background-color: #F8F4E9;
+            border-radius: 5px;
+            margin-top: 20px;
+            border: 1px solid #D4B483;
+        }
+        .confirmation h3 {
+            color: #2A5CAA;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        .candle-icon {
+            text-align: center;
+            margin: 25px 0;
+            font-size: 28px;
+            color: #D4B483;
+        }
+        #whatsapp-field {
+            display: none;
+            margin-top: 15px;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="candle-icon">🕯️</div>
+        <h1>Dudas y Quejas</h1>
+        <p style="text-align: center; color: #555555; margin-bottom: 30px; font-size: 1.1em;">
+            Estamos aquí para ayudarte. Por favor, completa el formulario y te responderemos pronto.
+        </p>
+        
+        <form id="dudasForm">
+            <div class="form-group">
+                <label for="tipo">Motivo de contacto:</label>
+                <select id="tipo" name="tipo" required>
+                    <option value="" disabled selected>Selecciona una opción</option>
+                    <option value="duda">Duda sobre productos</option>
+                    <option value="queja">Queja o reclamo</option>
+                    <option value="sugerencia">Sugerencia</option>
+                    <option value="personalizado">Consulta personalizada</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="nombre">Nombre completo:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="pedido">Número de pedido (opcional):</label>
+                <input type="text" id="pedido" name="pedido" placeholder="Ej: VELA-2024-001">
+            </div>
+            
+            <div class="form-group">
+                <label for="mensaje">Mensaje:</label>
+                <textarea id="mensaje" name="mensaje" placeholder="Describe tu duda o queja con detalles..." required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Preferencia de contacto:</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="contacto-email" name="contacto" value="email" checked>
+                        <label for="contacto-email">Email</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="contacto-whatsapp" name="contacto" value="whatsapp">
+                        <label for="contacto-whatsapp">WhatsApp</label>
+                    </div>
+                </div>
+                
+                <div id="whatsapp-field">
+                    <label for="whatsapp">Número de WhatsApp:</label>
+                    <input type="tel" id="whatsapp" name="whatsapp" placeholder="+52 55 1234 5678" pattern="^\+[\d\s\-]+$">
+                    <small style="display: block; margin-top: 5px; color: #666;">Incluye código de país (ej: +52 para México)</small>
+                </div>
+            </div>
+            
+            <button type="submit">Enviar Mensaje</button>
+            <a href="index.html" class="btn-home">← Volver al Inicio</a>
+        </form>
+        
+        <div id="confirmation" class="confirmation">
+            <h3>¡Gracias por contactarnos!</h3>
+            <p style="font-size: 1.1em;">Hemos recibido tu mensaje y te responderemos en menos de 24 horas.</p>
+            <div class="candle-icon">✨</div>
+            <a href="index.html" class="btn-home">Volver al Inicio</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mostrar/ocultar campo de WhatsApp
+            const whatsappRadio = document.getElementById('contacto-whatsapp');
+            const emailRadio = document.getElementById('contacto-email');
+            const whatsappField = document.getElementById('whatsapp-field');
+            const whatsappInput = document.getElementById('whatsapp');
+            
+            function toggleWhatsappField() {
+                if (whatsappRadio.checked) {
+                    whatsappField.style.display = 'block';
+                    whatsappInput.setAttribute('required', 'required');
+                } else {
+                    whatsappField.style.display = 'none';
+                    whatsappInput.removeAttribute('required');
+                }
+            }
+            
+            whatsappRadio.addEventListener('change', toggleWhatsappField);
+            emailRadio.addEventListener('change', toggleWhatsappField);
+            
+            // Manejo del formulario
+            document.getElementById('dudasForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validación adicional si WhatsApp está seleccionado
+                if (whatsappRadio.checked && !whatsappInput.value) {
+                    alert('Por favor ingresa tu número de WhatsApp');
+                    return;
+                }
+                
+                // Ocultar formulario y mostrar confirmación
+                document.getElementById('dudasForm').style.display = 'none';
+                document.getElementById('confirmation').style.display = 'block';
+                
+                // Aquí puedes agregar el código para enviar el formulario
+                // Ejemplo:
+                // const formData = new FormData(this);
+                // fetch('tu-servidor.php', { method: 'POST', body: formData })
+                //   .then(response => response.json())
+                //   .then(data => console.log(data))
+                //   .catch(error => console.error(error));
+            });
+        });
+    </script>
+      
+</body>
+</html>

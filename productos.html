@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos | CANDLESPOU</title>
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="shortcut icon" href="Imagenes/logopou.png" type="image/png">
+    <!-- Iconos de Font Awesome para el carrito -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Icono del carrito flotante -->
+    <div class="cart-icon" onclick="toggleCart()">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count">0</span>
+    </div>
+
+    <!-- Carrito de compras -->
+    <div class="cart-overlay" id="cartOverlay">
+        <div class="cart-container">
+            <div class="cart-header">
+                <h2>Tu Carrito</h2>
+                <button class="close-cart" onclick="toggleCart()">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <p class="empty-cart-message">Tu carrito está vacío</p>
+            </div>
+            <div class="cart-totals">
+                <div class="cart-subtotal">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">$0.00 MXN</span>
+                </div>
+                <div class="cart-iva">
+                    <span>IVA (16%):</span>
+                    <span id="iva">$0.00 MXN</span>
+                </div>
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span id="total">$0.00 MXN</span>
+                </div>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Proceder al Pago</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="Imagenes/logopou.png" alt="CANDLESPOU Logo"></a>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="#paquetes">Paquetes</a></li>
+            <li><a href="#Contacto">Contacto</a></li>
+            <li><a href="nosotros.html">Quienes somos</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Main Content -->
+    <main>
+        <h1 class="page-title">Nuestros Productos</h1>
+        
+        <!-- Sección de Productos -->
+        <section class="products" id="productos">
+            <!-- Producto 1 -->
+            <div class="product">
+                <img src="Imagenes/Lavanda.jpg" alt="Vela de Lavanda">
+                <h3>Alma de Serenidad</h3>
+                <p><b>Vela de Lavanda</b></p>
+                <p class="precio">$80 MXN</p>
+                <button class="add-to-cart" data-id="1" data-name="Vela de Lavanda - Alma de Serenidad" data-price="80">Añadir al carrito</button>
+            </div>
+            
+            <!-- Producto 2 -->
+            <div class="product">
+                <img src="Imagenes/romero.jpg" alt="Vela de Romero">
+                <h3>Esencia del Despertar</h3>
+                <p><b>Vela de Romero</b></p>
+                <p class="precio">$80 MXN</p>
+                <button class="add-to-cart" data-id="2" data-name="Vela de Romero - Esencia del Despertar" data-price="80">Añadir al carrito</button>
+            </div>
+            
+            <!-- Producto 3 -->
+            <div class="product">
+                <img src="Imagenes/naranja.jpg" alt="Vela de Naranja">
+                <h3>Luz del Sol Interno</h3>
+                <p><b>Vela de Naranja</b></p>
+                <p class="precio">$80 MXN</p>
+                <button class="add-to-cart" data-id="3" data-name="Vela de Naranja - Luz del Sol Interno" data-price="80">Añadir al carrito</button>
+            </div>
+            
+            <!-- Producto 4 -->
+            <div class="product">
+                <img src="Imagenes/vainilla.jpg" alt="Vela de Vainilla">
+                <h3>Abrazo Divino</h3>
+                <p><b>Vela de Vainilla</b></p>
+                <p class="precio">$80 MXN</p>
+                <button class="add-to-cart" data-id="4" data-name="Vela de Vainilla - Abrazo Divino" data-price="80">Añadir al carrito</button>
+            </div>
+
+            <!-- Producto 5 -->
+            <div class="product">
+                <img src="Imagenes/cafe.png" alt="Vela de Cafe">
+                <h3>Abrazo Divino</h3>
+                <p><b>Vela de Cafe</b></p>
+                <p class="precio">$120 MXN</p>
+                <button class="add-to-cart" data-id="5" data-name="Vela de Cafe - Abrazo Divino" data-price="120">Añadir al carrito</button>
+            </div>
+
+            <!-- Producto 6 -->
+            <div class="product">
+                <img src="Imagenes/canela.png" alt="Vela de canela">
+                <h3>Abrazo Divino</h3>
+                <p><b>Vela de Canela</b></p>
+                <p class="precio">$80 MXN</p>
+                <button class="add-to-cart" data-id="6" data-name="Vela de Canela - Abrazo Divino" data-price="80">Añadir al carrito</button>
+            </div>
+
+            <!-- Producto 7 -->
+            <div class="product">
+                <img src="Imagenes/albahaca.png" alt="Vela de albahaca">
+                <h3>Abrazo Divino</h3>
+                <p><b>Vela de Albahaca</b></p>
+                <p class="precio">$80 MXN</p>
+                <button class="add-to-cart" data-id="7" data-name="Vela de Albahaca - Abrazo Divino" data-price="80">Añadir al carrito</button>
+            </div>
+
+            <!-- Producto 8 -->
+            <div class="product">
+                <img src="Imagenes/manzana-canela.png" alt="Vela de manzana-canela">
+                <h3>Abrazo Divino</h3>
+                <p><b>Vela de Manzana-Canela</b></p>
+                <p class="precio">$80 MXN</p>
+                <button class="add-to-cart" data-id="8" data-name="Vela de Manzana-Canela - Abrazo Divino" data-price="80">Añadir al carrito</button>
+            </div>
+
+            <!-- Producto 9 -->
+            <div class="product">
+                <img src="Imagenes/rosa.png" alt="Vela de rosa">
+                <h3>Abrazo Divino</h3>
+                <p><b>Vela de Rosa</b></p>
+                <p class="precio">$100 MXN</p>
+                <button class="add-to-cart" data-id="9" data-name="Vela de Rosa - Abrazo Divino" data-price="100">Añadir al carrito</button>
+            </div>
+
+            <!-- Producto 10 -->
+            <div class="product">
+                <img src="Imagenes/frutos-rojos.jpg" alt="Vela de frutos-rojos">
+                <h3>Abrazo Divino</h3>
+                <p><b>Vela de Frutos-Rojos</b></p>
+                <p class="precio">$100 MXN</p>
+                <button class="add-to-cart" data-id="10" data-name="Vela de Frutos-Rojos - Abrazo Divino" data-price="100">Añadir al carrito</button>
+            </div>
+
+             <!-- Producto 11 -->
+             <div class="product">
+                <img src="Imagenes/bosques.jpg" alt="Vela de bosques">
+                <h3>Abrazo Divino</h3>
+                <p><b>Vela de Bosques</b></p>
+                <p class="precio">$100 MXN</p>
+                <button class="add-to-cart" data-id="11" data-name="Vela de Bosques - Abrazo Divino" data-price="100">Añadir al carrito</button>
+            </div>
+
+             <!-- Producto 12 -->
+             <div class="product">
+                <img src="Imagenes/citricos.jpg" alt="Vela de bosques">
+                <h3>Abrazo Divino</h3>
+                <p><b>Vela de Bosques</b></p>
+                <p class="precio">$100 MXN</p>
+                <button class="add-to-cart" data-id="12" data-name="Vela de Citricos - Abrazo Divino" data-price="100">Añadir al carrito</button>
+            </div>
+
+             <!-- Producto 13 -->
+             <div class="product">
+                <img src="Imagenes/sol-verano.jpg" alt="Vela de Sol-verano">
+                <h3>Abrazo Divino</h3>
+                <p><b>Vela de Sol de verano</b></p>
+                <p class="precio">$100 MXN</p>
+                <button class="add-to-cart" data-id="13" data-name="Vela de Sol de Verano - Abrazo Divino" data-price="100">Añadir al carrito</button>
+            </div>
+
+             <!-- Producto 14 -->
+             <div class="product">
+                <img src="Imagenes/lemos.png" alt="Vela de limon">
+                <h3>Abrazo Divino</h3>
+                <p><b>Vela de Limon</b></p>
+                <p class="precio">$100 MXN</p>
+                <button class="add-to-cart" data-id="14" data-name="Vela de Limon - Abrazo Divino" data-price="100">Añadir al carrito</button>
+            </div>
+        </section>
+        
+        <!-- Sección de Paquetes -->
+        <section class="packages" id="paquetes">
+            <h2 class="section-title">Nuestros Paquetes</h2>
+            
+            <!-- Paquete 1 -->
+            <div class="package">
+                <img src="Imagenes/paquete1.jpg" alt="Paquete Esencia Serenata">
+                <h3>Esencia Serenata</h3>
+                <p><b>Lavanda y Romero</b></p>
+                <p class="precio">$150 MXN</p>
+                <button class="add-to-cart" data-id="5" data-name="Paquete Esencia Serenata" data-price="150">Añadir al carrito</button>
+            </div>
+            
+            <!-- Paquete 2 -->
+            <div class="package">
+                <img src="Imagenes/paquete2.jpg" alt="Paquete Jardín Sagrado">
+                <h3>Jardín Sagrado</h3>
+                <p><b>Lavanda, Romero y Naranja</b></p>
+                <p class="precio">$220 MXN</p>
+                <button class="add-to-cart" data-id="6" data-name="Paquete Jardín Sagrado" data-price="220">Añadir al carrito</button>
+            </div>
+            
+            <!-- Paquete 3 -->
+            <div class="package">
+                <img src="Imagenes/paquete3.jpg" alt="Paquete Armonía Natural">
+                <h3>Armonía Natural</h3>
+                <p><b>Romero y Vainilla</b></p>
+                <p class="precio">$150 MXN</p>
+                <button class="add-to-cart" data-id="7" data-name="Paquete Armonía Natural" data-price="150">Añadir al carrito</button>
+            </div>
+            
+            <!-- Paquete 4 -->
+            <div class="package">
+                <img src="Imagenes/paquete4.jpg" alt="Paquete Paz en el Horizonte">
+                <h3>Paz en el Horizonte</h3>
+                <p><b>4 Fragancias</b></p>
+                <p class="precio">$300 MXN</p>
+                <button class="add-to-cart" data-id="8" data-name="Paquete Paz en el Horizonte" data-price="300">Añadir al carrito</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <!-- Redes Sociales -->
+            <div class="social-media">
+                <p>Síguenos en redes sociales</p>
+                <a href="https://www.facebook.com/profile.php?id=61566978972080&mibextid=ZbWKwL" target="_blank">
+                    <img src="Imagenes/iconoFB.png" alt="Facebook" width="30px">
+                </a>
+                <a href="https://www.instagram.com/candlespou/profilecard/?igsh=NWxxOXVoZGI2anRq" target="_blank">
+                    <img src="Imagenes/iconoInsta.png" alt="Instagram" width="30px">
+                </a>
+                <a href="https://wa.me/" target="_blank">
+                    <img src="Imagenes/iconoWhat.png" alt="WhatsApp" width="30px">
+                </a>
+            </div>
+            <!-- Enlaces adicionales -->
+            <div class="footer-links">
+                <a href="#">Políticas de privacidad</a>
+                <a href="#">Términos y condiciones</a>
+                <a href="nosotros.html">Quiénes somos</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="carrito.js"></script>
+</body>
+
+</html>

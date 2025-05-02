@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Compra | CANDLESPOU</title>
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="shortcut icon" href="Imagenes/logopou.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="Imagenes/logopou.png" alt="CANDLESPOU Logo"></a>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="productos.html">Productos</a></li>
+            <li><a href="nosotros.html">Quienes somos</a></li>
+        </ul>
+    </nav>
+    
+    <main class="checkout-container">
+        <h1>Finalizar Compra</h1>
+        
+        <div class="checkout-grid">
+            <!-- Resumen del pedido -->
+            <div class="order-summary">
+                <h2>Resumen de tu pedido</h2>
+                <div class="order-items" id="orderItems">
+                    <!-- Los productos se cargarán aquí con JavaScript -->
+                </div>
+                <div class="order-totals">
+                    <div class="order-subtotal">
+                        <span>Subtotal:</span>
+                        <span id="orderSubtotal">$0.00 MXN</span>
+                    </div>
+                    <div class="order-iva">
+                        <span>IVA (16%):</span>
+                        <span id="orderIva">$0.00 MXN</span>
+                    </div>
+                    <div class="order-total">
+                        <span>Total:</span>
+                        <span id="orderTotal">$0.00 MXN</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Formulario de pago -->
+            <div class="payment-form">
+                <h2>Información de Envío y Pago</h2>
+                <form id="paymentForm" onsubmit="processPayment(event)">
+                    <div class="form-group">
+                        <label for="fullName">Nombre completo</label>
+                        <input type="text" id="fullName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address">Dirección de envío</label>
+                        <textarea id="address" rows="3" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="city">Ciudad</label>
+                        <input type="text" id="city" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="zipCode">Código Postal</label>
+                        <input type="text" id="zipCode" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Teléfono</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    
+                    <h3>Información de Pago</h3>
+                    
+                    <div class="form-group">
+                        <label for="cardNumber">Número de tarjeta</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cardExpiry">Fecha de expiración</label>
+                            <input type="text" id="cardExpiry" placeholder="MM/AA" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cardCvc">CVC</label>
+                            <input type="text" id="cardCvc" placeholder="123" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cardName">Nombre en la tarjeta</label>
+                        <input type="text" id="cardName" required>
+                    </div>
+                    
+                    <button type="submit" class="submit-payment">Pagar ahora</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="social-media">
+                <p>Síguenos en redes sociales</p>
+                <a href="https://www.facebook.com/profile.php?id=61566978972080&mibextid=ZbWKwL" target="_blank">
+                    <img src="Imagenes/iconoFB.png" alt="Facebook" width="30px">
+                </a>
+                <a href="https://www.instagram.com/candlespou/profilecard/?igsh=NWxxOXVoZGI2anRq" target="_blank">
+                    <img src="Imagenes/iconoInsta.png" alt="Instagram" width="30px">
+                </a>
+                <a href="https://wa.me/" target="_blank">
+                    <img src="Imagenes/iconoWhat.png" alt="WhatsApp" width="30px">
+                </a>
+            </div>
+            <div class="footer-links">
+                <a href="#">Políticas de privacidad</a>
+                <a href="#">Términos y condiciones</a>
+                <a href="nosotros.html">Quiénes somos</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Cargar los datos del carrito
+        document.addEventListener('DOMContentLoaded', function() {
+            const cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const totals = JSON.parse(localStorage.getItem('orderTotals')) || {
+                subtotal: '0.00',
+                iva: '0.00',
+                total: '0.00'
+            };
+            
+            const orderItemsContainer = document.getElementById('orderItems');
+            
+            if (cart.length === 0) {
+                orderItemsContainer.innerHTML = '<p>No hay productos en el carrito</p>';
+            } else {
+                orderItemsContainer.innerHTML = '';
+                cart.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'order-item';
+                    itemElement.innerHTML = `
+                        <div class="order-item-name">${item.name} x${item.quantity}</div>
+                        <div class="order-item-price">$${(item.price * item.quantity).toFixed(2)} MXN</div>
+                    `;
+                    orderItemsContainer.appendChild(itemElement);
+                });
+            }
+            
+            // Actualizar totales
+            document.getElementById('orderSubtotal').textContent = `$${totals.subtotal} MXN`;
+            document.getElementById('orderIva').textContent = `$${totals.iva} MXN`;
+            document.getElementById('orderTotal').textContent = `$${totals.total} MXN`;
+        });
+        
+        // Procesar el pago (simulado)
+        function processPayment(event) {
+            event.preventDefault();
+            
+            // Validación básica
+            const cardNumber = document.getElementById('cardNumber').value.replace(/\s/g, '');
+            if (cardNumber.length !== 16 || isNaN(cardNumber)) {
+                alert('Por favor ingrese un número de tarjeta válido (16 dígitos)');
+                return;
+            }
+            
+            // Simular procesamiento de pago
+            alert('¡Pago procesado con éxito! Gracias por tu compra.');
+            
+            // Limpiar carrito
+            localStorage.removeItem('cartItems');
+            localStorage.removeItem('orderTotals');
+            
+            // Redirigir a página de confirmación (puedes crear una página confirmation.html)
+            window.location.href = 'index.html'; // O redirige a una página de confirmación
+        }
+        
+        // Formatear número de tarjeta
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '');
+            if (value.length > 0) {
+                value = value.match(new RegExp('.{1,4}', 'g')).join(' ');
+            }
+            e.target.value = value;
+        });
+        
+        // Formatear fecha de expiración
+        document.getElementById('cardExpiry').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>

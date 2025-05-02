@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatBot Candlespou</title>
+    <style>
+        /* Estilos para el chatbot flotante */
+        #chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 320px;
+            height: 420px;
+            background-color: #fff9f0;
+            border-radius: 25px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            display: none;
+            border: 1px solid #e0c9a6;
+            font-family: 'Arial', sans-serif;
+            margin-left: -10px;
+        }
+
+        .chatbot-header {
+            background-color: #8B5A2B;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #6D4C2E;
+            border-radius: 25px 25px 0 0;
+        }
+
+        .chatbot-title {
+            font-size: 16px;
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .chatbot-close-btn {
+            background-color: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 0 5px;
+        }
+
+        .chatbot-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+            overflow: hidden;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            overflow-y: auto;
+            font-size: 14px;
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-left: 15px;
+        }
+
+        .welcome-message {
+            background-color: #f8f1e5;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .quick-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .quick-option {
+            background-color: #f0e6d2;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 13px;
+            transition: background-color 0.3s;
+            border: 1px solid #e0c9a6;
+        }
+
+        .quick-option:hover {
+            background-color: #e0c9a6;
+        }
+
+        .chatbot-input-area {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        .chatbot-input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border-radius: 20px;
+            border: 1px solid #e0c9a6;
+            font-size: 14px;
+            background-color: #fff;
+        }
+
+        .chatbot-send-btn {
+            padding: 10px;
+            border: none;
+            background-color: #8B5A2B;
+            color: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .chatbot-send-btn:hover {
+            background-color: #6D4C2E;
+        }
+
+        .chat-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #8B5A2B;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 9999;
+            transition: transform 0.3s;
+        }
+
+        .chat-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .user, .bot {
+            padding: 10px 15px;
+            border-radius: 18px;
+            max-width: 80%;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+
+        .user {
+            background-color: #e8f5e9;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+            color: #2e7d32;
+        }
+
+        .bot {
+            background-color: #f5f5f5;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .typing-indicator {
+            display: flex;
+            padding: 10px 15px;
+            background-color: #f5f5f5;
+            border-radius: 18px;
+            align-self: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #8B5A2B;
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+
+        @keyframes typingAnimation {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+
+        .aromas-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .aroma-item {
+            background-color: #f8f1e5;
+            padding: 8px;
+            border-radius: 10px;
+            font-size: 12px;
+            border: 1px solid #e0c9a6;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Chatbot flotante -->
+    <div id="chatbot" class="chatbot">
+        <div id="chatbot-header" class="chatbot-header">
+            <span class="chatbot-title">CandleBot 🕯️</span>
+            <button id="close-btn" class="chatbot-close-btn">×</button>
+        </div>
+        <div id="chatbot-body" class="chatbot-body">
+            <div class="chatbot-messages">
+                <div class="welcome-message">
+                    <strong>¡Hola! Soy CandleBot, tu asistente de velas.</strong><br><br>
+                    ¿En qué puedo ayudarte hoy? Puedes preguntarme sobre nuestros productos o elegir una opción:
+                </div>
+                <div class="quick-options">
+                    <div class="quick-option" data-option="productos">📦 Nuestros productos</div>
+                    <div class="quick-option" data-option="aromas">🌸 Fragancias disponibles</div>
+                    <div class="quick-option" data-option="envios">🚚 Opciones de envío</div>
+                </div>
+            </div>
+            <div class="chatbot-input-area">
+                <input type="text" id="user-input" class="chatbot-input" placeholder="Escribe tu mensaje...">
+                <button id="send-btn" class="chatbot-send-btn">Enviar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ícono flotante -->
+    <div class="chat-icon" id="chat-icon">🕯️</div>
+
+    <script>
+        // Seleccionar los elementos
+        const chatbot = document.getElementById("chatbot");
+        const closeBtn = document.getElementById("close-btn");
+        const sendBtn = document.getElementById("send-btn");
+        const userInput = document.getElementById("user-input");
+        const chatbotMessages = document.querySelector(".chatbot-messages");
+        const quickOptions = document.querySelectorAll(".quick-option");
+        const chatbotHeader = document.getElementById("chatbot-header");
+
+        // Mostrar mensaje de bienvenida al abrir el chat
+        document.getElementById("chat-icon").addEventListener("click", () => {
+            chatbot.style.display = "flex";
+        });
+
+        // Función para enviar mensajes
+        function sendMessage() {
+            const userMessage = userInput.value.trim();
+            if (userMessage) {
+                addMessage(userMessage, "user");
+                userInput.value = "";
+                showTypingIndicator();
+                setTimeout(() => {
+                    removeTypingIndicator();
+                    botResponse(userMessage);
+                }, 1000);
+            }
+        }
+
+        sendBtn.addEventListener("click", sendMessage);
+        userInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") sendMessage();
+        });
+
+        // Opciones rápidas
+        quickOptions.forEach(option => {
+            option.addEventListener("click", function() {
+                const optionText = this.textContent;
+                const optionType = this.getAttribute("data-option");
+                addMessage(optionText, "user");
+                showTypingIndicator();
+                setTimeout(() => {
+                    removeTypingIndicator();
+                    handleQuickOption(optionType);
+                }, 1000);
+            });
+        });
+
+        // Manejar opciones rápidas
+        function handleQuickOption(option) {
+            let response = "";
+            switch(option) {
+                case "productos":
+                    response = "Ofrecemos velas aromáticas, velas de soja, velas decorativas y kits para hacer tus propias velas. ¿Te interesa algún tipo en particular?";
+                    break;
+                case "aromas":
+                    response = "Tenemos estos deliciosos aromas disponibles (todas a $100 c/u):";
+                    showAromasList();
+                    break;
+                case "envios":
+                    response = "Hacemos envíos a todo el país. Envío estándar (3-5 días): $150. Envío express (24-48h): $300. ¡En compras mayores a $1000 el envío es gratis!";
+                    break;
+                default:
+                    response = "Gracias por tu consulta. ¿Hay algo más sobre lo que te gustaría saber?";
+            }
+            if (option !== "aromas") {
+                addMessage(response, "bot");
+            }
+        }
+
+        // Mostrar lista de aromas
+        function showAromasList() {
+            const aromas = [
+                "🌴 Coco", "🍓 Frutos rojos", "💜 Lavanda", 
+                "🍎 Manzana canela", "🌹 Rosas", "☕ Café",
+                "🍊 Cítricos", "🏖️ Sol de verano (playero)", 
+                "🌲 Bosques", "🪵 Sándalo", "🌿 Menta",
+                "🍋 Limón", "🌼 Jazmín", "✨ Nardo"
+            ];
+            
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add("bot");
+            
+            const title = document.createElement("div");
+            title.textContent = "Tenemos estos deliciosos aromas disponibles (todas a $100 c/u):";
+            messageDiv.appendChild(title);
+            
+            const aromasContainer = document.createElement("div");
+            aromasContainer.className = "aromas-container";
+            
+            aromas.forEach(aroma => {
+                const aromaItem = document.createElement("div");
+                aromaItem.className = "aroma-item";
+                aromaItem.textContent = aroma;
+                aromasContainer.appendChild(aromaItem);
+            });
+            
+            messageDiv.appendChild(aromasContainer);
+            chatbotMessages.appendChild(messageDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
+        // Función para mostrar las respuestas del bot
+        function botResponse(message) {
+            message = message.toLowerCase();
+            let response = "Gracias por tu mensaje. ¿Hay algo más sobre nuestras velas que te gustaría saber?";
+            
+            if (message.includes("hola") || message.includes("buenos días") || message.includes("buenas tardes")) {
+                response = "¡Hola! Bienvenido a Candlespou. ¿En qué puedo ayudarte hoy?";
+            } else if (message.includes("producto") || message.includes("vela") || message.includes("velas") || message.includes("tipos")) {
+                response = "Tenemos varios tipos de velas: aromáticas, de soja, decorativas y kits DIY. Nuestras velas están hechas con cera natural y aceites esenciales. ¿Te interesa alguna en particular?";
+            } else if (message.includes("aroma") || message.includes("olor") || message.includes("fragancia") || message.includes("esencia")) {
+                response = "Tenemos estos deliciosos aromas disponibles (todas a $100 c/u):";
+                showAromasList();
+                return;
+            } else if (message.includes("precio") || message.includes("cuánto") || message.includes("cuesta")) {
+                response = "Los precios varían según el tipo y tamaño: Velas pequeñas: $250, Velas medianas: $400, Velas grandes: $600. Kits DIY: $800. ¡Todos los aromas tienen un costo de $100 adicional!";
+            } else if (message.includes("envío") || message.includes("entrega") || message.includes("recibo")) {
+                response = "Hacemos envíos a todo el país. Tiempos de entrega: CABA (1-2 días), GBA (2-3 días), Interior (3-5 días). Envío gratis en compras mayores a $1000.";
+            } else if (message.includes("contacto") || message.includes("ubicación") || message.includes("local")) {
+                response = "Estamos en Calle Aroma 123, CABA. Atendemos de Lunes a Viernes de 10 a 18hs. Teléfono: 11 1234-5678. Email: info@candlespou.com";
+            }
+            
+            addMessage(response, "bot");
+        }
+
+        // Función para agregar los mensajes al chat
+        function addMessage(message, sender) {
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add(sender);
+            messageDiv.textContent = message;
+            chatbotMessages.appendChild(messageDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
+        // Mostrar indicador de que el bot está escribiendo
+        function showTypingIndicator() {
+            const typingDiv = document.createElement("div");
+            typingDiv.className = "typing-indicator";
+            typingDiv.id = "typing-indicator";
+            typingDiv.innerHTML = `
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            `;
+            chatbotMessages.appendChild(typingDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
+        // Eliminar indicador de escritura
+        function removeTypingIndicator() {
+            const typingIndicator = document.getElementById("typing-indicator");
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+        // Cerrar el chatbot
+        closeBtn.addEventListener("click", () => {
+            chatbot.style.display = "none";
+        });
+
+        // Hacer el chatbot movible
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        chatbotHeader.addEventListener("mousedown", (e) => {
+            isDragging = true;
+            offsetX = e.clientX - chatbot.getBoundingClientRect().left;
+            offsetY = e.clientY - chatbot.getBoundingClientRect().top;
+            chatbot.style.cursor = "grabbing";
+        });
+
+        document.addEventListener("mousemove", (e) => {
+            if (isDragging) {
+                chatbot.style.left = e.clientX - offsetX + "px";
+                chatbot.style.top = e.clientY - offsetY + "px";
+                chatbot.style.right = "auto";
+                chatbot.style.bottom = "auto";
+            }
+        });
+
+        document.addEventListener("mouseup", () => {
+            isDragging = false;
+            chatbot.style.cursor = "default";
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+

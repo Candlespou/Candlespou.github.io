@@ -7,131 +7,97 @@
     <title>CANDLESPOU | Velas de Aromaterapia</title>
     <link rel="stylesheet" href="estilo.css">
     <link rel="shortcut icon" href="Imagenes/logopou.png" type="image/png">
-
+    <!-- Iconos de Font Awesome para el carrito -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
+    <!-- Icono del carrito flotante -->
+    <div class="cart-icon" onclick="toggleCart()">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count">0</span>
+    </div>
+
+    <!-- Carrito de compras -->
+    <div class="cart-overlay" id="cartOverlay">
+        <div class="cart-container">
+            <div class="cart-header">
+                <h2>Tu Carrito</h2>
+                <button class="close-cart" onclick="toggleCart()">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <p class="empty-cart-message">Tu carrito está vacío</p>
+            </div>
+            <div class="cart-totals">
+                <div class="cart-subtotal">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">$0.00 MXN</span>
+                </div>
+                <div class="cart-iva">
+                    <span>IVA (16%):</span>
+                    <span id="iva">$0.00 MXN</span>
+                </div>
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span id="total">$0.00 MXN</span>
+                </div>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Pagar</button>
+        </div>
+    </div>
 
     <!-- Header -->
     <header>
-        
+        <div class="logo">
+            <img src="Imagenes/logopou.png" alt="CANDLESPOU Logo">
+        </div>
     </header>
-        <nav>
-            <ul>
-                <li><a href="#productos">Productos</a></li>
-                <li><a href="#paquetes">Paquetes</a></li>
-                <li><a href="#Contacto">Contacto</a></li>
-                <li><a href="nosotros.html">Quienes somos</a></li>
-                <li><a href="#Preguntas">Preguntas frecuentes</a></li>
-            </ul>
-        </nav>
+
+    <nav>
+        <ul>
+            <li><a href="productos.html">Todos los Productos</a></li>
+            <li><a href="productos.html">Paquetes</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="nosotros.html">Quienes somos</a></li>
+        </ul>
+    </nav>
+
     <!-- Main Content -->
     <main>
-        <!-- Sección de Productos -->
-          
-        <section class="products" id="productos">
-            <div class="product">
-                <img src="Imagenes/Lavanda.jpg" alt="Producto 1">
-                <p><b>1. Vela de Lavanda:</b><br>
-                    <strong>Nombre: "Alma de Serenidad"</strong><br>
-                    <b>Descripción:</b> Un bálsamo para el espíritu,
-                    esta fragancia calmante te envuelve en una
-                    atmósfera de paz y equilibrio interior,
-                    perfecta para meditar o simplemente relajarte.
+        <section class="featured-products">
+            <h1>Nuestros Productos Destacados</h1>
+            <div class="products-grid">
+                <!-- Producto 1 -->
+                <div class="product-card" onclick="window.location.href='productos.html#lavanda'">
+                    <img src="Imagenes/Lavanda.jpg" alt="Vela de Lavanda">
+                    <h3>Alma de Serenidad</h3>
+                    <p class="product-price">$80 MXN</p>
+                </div>
 
-                    <p class="precio">$80MXN</p>
-                </p>
+                <!-- Producto 2 -->
+                <div class="product-card" onclick="window.location.href='productos.html#romero'">
+                    <img src="Imagenes/romero.jpg" alt="Vela de Romero">
+                    <h3>Esencia del Despertar</h3>
+                    <p class="product-price">$80 MXN</p>
+                </div>
+
+                <!-- Producto 3 -->
+                <div class="product-card" onclick="window.location.href='productos.html#naranja'">
+                    <img src="Imagenes/naranja.jpg" alt="Vela de Naranja">
+                    <h3>Luz del Sol Interno</h3>
+                    <p class="product-price">$80 MXN</p>
+                </div>
+
+                <!-- Producto 4 -->
+                <div class="product-card" onclick="window.location.href='productos.html#vainilla'">
+                    <img src="Imagenes/vainilla.jpg" alt="Vela de Vainilla">
+                    <h3>Abrazo Divino</h3>
+                    <p class="product-price">$80 MXN</p>
+                </div>
             </div>
-            <div class="product">
-                <img src="Imagenes/romero.jpg" Producto 2" alt="producto2">
-                <p><b>2. Vela de Romero:</b><br>
-                    <strong>Nombre: "Esencia del Despertar"</strong><br>
-                    <b>Descripción:</b> Una brisa revitalizante que eleva la mente
-                    y el alma, este aroma herbal trae claridad, inspiración
-                    y renovación, ideal para despejar la energía de cualquier espacio.
 
-                    <p class="precio">$80MXN</p>
-                </p>
-            </div>
-            <div class="product">
-                <img src="Imagenes/naranja.jpg" alt="Producto 3">
-                <p><b>3. Vela de Naranja:</b><br>
-                    <strong>Nombre: "Luz del Sol Interno"</strong><br>
-                    <b>Descripción:</b> Un estallido de energía y alegría, esta
-                    fragancia cítrica despierta los sentidos y eleva el espíritu,
-                    infundiendo optimismo y vitalidad en tu día.
-
-                    <p class="precio">$80MXN</p>
-                </p>
-            </div>
-            <div class="product">
-                <img src="Imagenes/vainilla.jpg" alt="Producto 4">
-                <p><b>4. Vela de Vainilla:</b><br>
-                    <strong>Nombre: "Abrazo Divino"</strong><br>
-                    <b>Descripción:</b> Dulce y reconfortante, como un abrazo celestial,
-                    la fragancia suave de la vainilla envuelve tu entorno en una
-                    atmósfera cálida y llena de amor y protección.
-
-                    <p class="precio">$80MXN</p>
-                </p>
-            </div>
-        </section>
-        <br><br>
-        <!-- Sección de Paquetes -->
-        <section class="packages" id="paquetes">
-            <div class="package">
-                <img src="Imagenes/paquete1.jpg" alt="Paquete 1">
-                <p><b>1. Paquete “Esencia Serenata”</b><br>
-                    <b>Fragancias: Lavanda y Romero</b><br>
-                    Descripción: Sumérgete en la serenidad de la
-                    lavanda calmante combinado con la frescura herbal
-                    del romero. Este paquete es ideal para quienes buscan un
-                    escape relajante después de un largo día, ayudando a
-                    despejar la mente y promover la paz interior, es perfecto
-                    para momentos de meditación o relajación nocturna.
-
-                    <p class="precio">$150MXN</p>
-                </p>
-            </div>
-            <div class="package">
-                <img src="Imagenes/paquete2.jpg" alt="Paquete 2">
-                <p><b>2. Paquete "Jardín Sagrado"</b><br>
-                    <b>Fragancias: Lavanda, Romero y Naranja</b><br>
-                    Descripción: Este paquete fusiona lo mejor de la naturaleza
-                    con lavanda calmante, romero purificante y naranja revitalizante.
-                    "Jardín Sagrado" está pensado para crear un espacio de bienestar
-                    integral, donde la relajación y la frescura se encuentran en
-                    perfecta armonía, es ideal para cualquier momento del día, en
-                    especial para crear un refugio de paz en tu hogar.
-
-                    <p class="precio">$220MXN</p>
-                </p>
-            </div>
-            <div class="package">
-                <img src="Imagenes/paquete3.jpg" alt="Paquete 3">
-                <p><b>3. Paquete “Armonía Natural”</b><br>
-                    <b>Fragancias: Romero y Vainilla</b><br>
-                    Descripción: El paquete "Armonía Natural" mezcla la frescura del
-                    romero con la dulzura cremosa de la vainilla, creando un equilibrio
-                    único entre lo revitalizante y lo reconfortante, es perfecto para
-                    quienes buscan una atmósfera limpia, pero con un toque acogedor,
-                    ideal para el hogar o la oficina.
-
-                    <p class="precio">$150MXN</p>
-                </p>
-            </div>
-            <div class="package">
-                <img src="Imagenes/paquete4.jpg" alt="Paquete 4">
-                <p><b>4. Paquete “Paz en el Horizonte”</b><br>
-                    <b>Fragancias: Romero, Vainilla, Naranja, Lavanda</b><br>
-                    Descripción: El paquete más completo, "Paz en el Horizonte", ofrece
-                    una experiencia completa que combina las  cuatro fragancias: lavanda 
-                    para la calma, romero para la claridad, naranja para la energía, y 
-                    vainilla para la calidez, es ideal para quienes buscan versatilidad en
-                    sus aromas y desean un ambiente equilibrio durante todo el día.
-
-                    <p class="precio">$300MXN</p>
-                </p>
+            <div class="view-all">
+                <a href="productos.html" class="view-all-btn">Ver todos los productos</a>
             </div>
         </section>
         <br><br>
@@ -140,19 +106,19 @@
             <h1>Preguntas Frecuentes</h1>
             <details>
                 <summary>¿Cómo hago mi pedido?</summary>
-                <p>Para atención personalizada los pedidos son 
+                <p>Para atención personalizada los pedidos son
                     realizados por teléfono, DM, o correo electrónico.
                 </p>
             </details>
             <details>
                 <summary>¿Tiempo de entrega?</summary>
-                <p>Dependiendo de la demanda o stock de esencias, 
+                <p>Dependiendo de la demanda o stock de esencias,
                     los pedidos son entregados de 2 a 3 días.
                 </p>
             </details>
             <details>
                 <summary>¿Puedo combinar esencias?</summary>
-                <p>¡Claro! Al ordenar más de dos velas puedes pedir 
+                <p>¡Claro! Al ordenar más de dos velas puedes pedir
                     la combinación de esencias de tu preferencia.
                 </p>
             </details>
@@ -161,34 +127,306 @@
                 <p>No hay cambios ni devolociones.
                 </p>
             </details>
+            <details>
+                <summary>¿Que tipo de velas hacen?</summary>
+                <p>Hacemos velas para todo tipo de eventos, bodas, bautizos, babyshower, quinceañeras, etc.
+                </p>
+            </details>
         </section>
-    </main>
+        </ma>
 
-    <!-- Footer -->
-    <!-- Footer -->
-    <footer>
-        <div class="footer-container">
-            <!-- Redes Sociales -->
-            <div class="social-media">
-                <p>Síguenos en redes sociales</p>
-                <a href="https://www.facebook.com/profile.php?id=61566978972080&mibextid=ZbWKwL" target="_blank">
-                    <img src="Imagenes/iconoFB.png" alt="Facebook" width="30px">
-                </a>
-                <a href="https://www.instagram.com/candlespou/profilecard/?igsh=NWxxOXVoZGI2anRq" target="_blank">
-                    <img src="Imagenes/iconoInsta.png" alt="Instagram" width="30px">
-                </a>
-                <a href="https://wa.me/" target="_blank">
-                    <img src="Imagenes/iconoWhat.png" alt="WhatsApp" width="30px">
-                </a>
+        <!-- Footer -->
+        <!-- Footer -->
+        <footer>
+            <div class="footer-container">
+                <!-- Redes Sociales -->
+                <div class="social-media">
+                    <p>Síguenos en redes sociales</p>
+                    <a href="https://www.facebook.com/profile.php?id=61566978972080&mibextid=ZbWKwL" target="_blank">
+                        <img src="Imagenes/iconoFB.png" alt="Facebook" width="30px">
+                    </a>
+                    <a href="https://www.instagram.com/candlespou/profilecard/?igsh=NWxxOXVoZGI2anRq" target="_blank">
+                        <img src="Imagenes/iconoInsta.png" alt="Instagram" width="30px">
+                    </a>
+                    <a href="https://wa.me/" target="_blank">
+                        <img src="Imagenes/iconoWhat.png" alt="WhatsApp" width="30px">
+                    </a>
+                </div>
+                <!-- Enlaces adicionales -->
+                <div class="footer-links">
+                    <a href="#">Políticas de privacidad</a>
+                    <a href="#">Términos y condiciones</a>
+                    <a href="#">Quiénes somos</a>
+                    <a href="quejasydudas.html">Dudas y quejas</a>
+
+                </div>
             </div>
-            <!-- Enlaces adicionales -->
-            <div class="footer-links">
-                <a href="#">Políticas de privacidad</a>
-                <a href="#">Términos y condiciones</a>
-                <a href="#">Quiénes somos</a>
-            </div>
+        </footer>
+        <iframe src="chatbot.html" width="400" height="440"
+            style="border: none; position: fixed; bottom: 20px; right: 20px; z-index: 999;">
+        </iframe>
+
+        <!-- Anuncio flotante centrado y grande -->
+        <div class="floating-promo" id="floatingPromo">
+            <button class="close-btn" id="closePromoBtn">✕</button>
+            <img src="Imagenes\promocion3.jpg" alt="Promoción Candlespou">
         </div>
-    </footer>
+
+        <style>
+            /* Estilos para el anuncio */
+            .floating-promo {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 80%;
+                max-width: 600px;
+                background: white;
+                border-radius: 15px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+                padding: 20px;
+                z-index: 1000;
+                text-align: center;
+                display: none;
+                /* Oculto inicialmente */
+                animation: fadeIn 0.5s ease-out;
+            }
+
+            .floating-promo img {
+                width: 100%;
+                border-radius: 10px;
+                display: block;
+                margin: 0 auto;
+            }
+
+            .close-btn {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background: #ff4757;
+                color: white;
+                border: none;
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background 0.3s;
+            }
+
+            .close-btn:hover {
+                background: #ff6b81;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translate(-50%, -40%);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translate(-50%, -50%);
+                }
+            }
+        </style>
+
+        <script>
+            // Mostrar anuncio al cargar la página
+            window.onload = function () {
+                setTimeout(function () {
+                    document.getElementById('floatingPromo').style.display = 'block';
+                }, 1000);
+            };
+
+            // Cerrar anuncio
+            document.getElementById('closePromoBtn').addEventListener('click', function () {
+                document.getElementById('floatingPromo').style.display = 'none';
+            });
+        </script>
+
+        <!DOCTYPE html>
+        <html lang="es">
+
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Candlespou - Velas Aromáticas</title>
+            <style>
+                /* Estilos base para ambos anuncios */
+                .floating-ad {
+                    position: fixed;
+                    background: white;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                    padding: 10px;
+                    z-index: 1000;
+                    display: none;
+                    animation: fadeIn 0.5s ease-in-out;
+                    transition: all 0.3s ease;
+                    overflow: hidden;
+                }
+
+                /* Primer anuncio (inferior derecho) */
+                #floatingAd1 {
+                    bottom: 20px;
+                    right: 20px;
+                    width: 250px;
+                    cursor: pointer;
+                }
+
+                /* Segundo anuncio (inferior izquierdo) */
+                #floatingAd2 {
+                    bottom: 20px;
+                    left: 20px;
+                    width: 250px;
+                    cursor: pointer;
+                }
+
+                /* Estado expandido para ambos anuncios */
+                .floating-ad.expanded {
+                    width: 80% !important;
+                    max-width: 600px !important;
+                    height: auto;
+                    max-height: 80vh;
+                    bottom: 50% !important;
+                    left: 50% !important;
+                    right: auto !important;
+                    transform: translate(-50%, 50%) !important;
+                }
+
+                .floating-ad img {
+                    width: 100%;
+                    border-radius: 8px;
+                    display: block;
+                }
+
+                .close-btn {
+                    position: absolute;
+                    top: -15px;
+                    right: -15px;
+                    background: #ff4757;
+                    color: white;
+                    border: 2px solid white;
+                    border-radius: 50%;
+                    width: 38px;
+                    height: 38px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    font-size: 10px;
+                    z-index: 1003;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+                    transition: all 0.2s ease;
+                    line-height: 1;
+                }
+
+                .close-btn:hover {
+                    background: #e84118;
+                    transform: scale(1.1);
+                    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+                }
+
+                @keyframes fadeIn {
+                    from {
+                        opacity: 0;
+                        transform: translateY(20px);
+                    }
+
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+
+                .click-message {
+                    position: absolute;
+                    bottom: 10px;
+                    left: 0;
+                    right: 0;
+                    text-align: center;
+                    background: rgba(0, 0, 0, 0.7);
+                    color: white;
+                    padding: 5px;
+                    font-size: 12px;
+                    border-bottom-left-radius: 8px;
+                    border-bottom-right-radius: 8px;
+                }
+
+                .ad-content {
+                    position: relative;
+                    height: 100%;
+                }
+            </style>
+        </head>
+
+        <body>
+            <div class="floating-ad" id="floatingAd1">
+                <button class="close-btn" id="closeBtn1">X</button>
+                <div class="ad-content">
+                    <img src="Imagenes/promocion2.jpg" alt="Promoción 1 Candlespou">
+                    <div class="click-message">Haz clic para ampliar</div>
+                </div>
+            </div>
+
+            <!-- Segundo anuncio flotante -->
+            <div class="floating-ad" id="floatingAd2">
+                <button class="close-btn" id="closeBtn2">X</button>
+                <div class="ad-content">
+                    <img src="Imagenes/promocion1.jpg" alt="Promoción 2 Candlespou">
+                    <div class="click-message">Haz clic para ampliar</div>
+                </div>
+            </div>
+
+            <script>
+                // Mostrar anuncios después de 1 segundo
+                setTimeout(function () {
+                    document.getElementById('floatingAd1').style.display = 'block';
+                    document.getElementById('floatingAd2').style.display = 'block';
+                }, 1000);
+
+                // Funcionalidad para el primer anuncio
+                document.getElementById('floatingAd1').addEventListener('click', function (e) {
+                    // Evitar que se cierre al hacer clic en el botón X
+                    if (e.target.id !== 'closeBtn1') {
+                        this.classList.toggle('expanded');
+                    }
+                });
+
+                document.getElementById('closeBtn1').addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    document.getElementById('floatingAd1').style.display = 'none';
+                    localStorage.setItem('ad1Closed', 'true');
+                });
+
+                // Funcionalidad para el segundo anuncio
+                document.getElementById('floatingAd2').addEventListener('click', function (e) {
+                    // Evitar que se cierre al hacer clic en el botón X
+                    if (e.target.id !== 'closeBtn2') {
+                        this.classList.toggle('expanded');
+                    }
+                });
+
+                document.getElementById('closeBtn2').addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    document.getElementById('floatingAd2').style.display = 'none';
+                    localStorage.setItem('ad2Closed', 'true');
+                });
+
+                // Verificar si los anuncios fueron cerrados anteriormente
+                if (localStorage.getItem('ad1Closed') === 'true') {
+                    document.getElementById('floatingAd1').style.display = 'none';
+                }
+
+                if (localStorage.getItem('ad2Closed') === 'true') {
+                    document.getElementById('floatingAd2').style.display = 'none';
+                }
+            </script>
+        </body>
+
+        </html>
 
 
 </body>
