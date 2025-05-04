@@ -14,12 +14,25 @@
         <div class="logo">
             <a href="index.html"><img src="Imagenes/logopou.png" alt="CANDLESPOU Logo"></a>
         </div>
+        <div class="clock-candle">
+            <div class="time-display" id="time"></div>
+            <div class="candle-container">
+                <div class="candle">
+                    <div class="flame" id="flame"></div>
+                    <div class="smoke" id="smoke"></div>
+                    <div class="wick"></div>
+                    <div class="wax"></div>
+                </div>
+            </div>
+        </div>
     </header>
     
     <nav>
         <ul>
             <li><a href="index.html">Inicio</a></li>
-            <li><a href="productos.html">Productos</a></li>
+            <li><a href="productos.html">Todos los Productos</a></li>
+            <li><a href="productos.html">Paquetes</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
             <li><a href="nosotros.html">Quienes somos</a></li>
         </ul>
     </nav>
@@ -174,5 +187,40 @@
             document.getElementById('contactForm').reset();
         }
     </script>
+    <script>
+        // Función para actualizar el reloj y el estado de la vela
+        function updateClockAndCandle() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            
+            // Actualizar el reloj
+            document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;
+            
+            // Obtener elementos de la vela
+            const candle = document.querySelector('.candle');
+            const flame = document.getElementById('flame');
+            const smoke = document.getElementById('smoke');
+            
+            // Determinar el estado según la hora
+            if (hours >= 19 || hours < 7) {
+                // Noche (7:00 pm - 6:59 am) - Vela encendida
+                candle.classList.add('night');
+                candle.classList.remove('morning');
+            } else if (hours >= 7 && hours < 11) {
+                // Mañana (7:00 am - 10:59 am) - Humo
+                candle.classList.add('morning');
+                candle.classList.remove('night');
+            } else {
+                // Día (11:00 am - 6:59 pm) - Vela apagada
+                candle.classList.remove('night', 'morning');
+            }
+        }
+        
+        // Actualizar cada minuto
+        updateClockAndCandle();
+        setInterval(updateClockAndCandle, 1000);
+        </script>
 </body>
 </html>
